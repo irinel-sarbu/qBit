@@ -6,6 +6,7 @@ import net.vqbe.eventSystem.Observer;
 import net.vqbe.eventSystem.types.CoreEventType;
 import net.vqbe.eventSystem.types.application.WindowCloseEvent;
 import net.vqbe.opengl.Window;
+import net.vqbe.utils.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,13 @@ public abstract class Application implements Observer {
 
     public final void run() {
 
+        double lastTime = Time.getTime();
         while (running) {
+            // Frame time calculation
+            double currentTime = Time.getTime();
+            double dt = currentTime - lastTime;
+            lastTime = currentTime;
+
             processInput();
             update();
             render();
@@ -52,7 +59,7 @@ public abstract class Application implements Observer {
 
     private boolean onWindowClose(WindowCloseEvent e) {
         LOGGER.debug("Application closing...");
-        
+
         running = false;
         return true;
     }
