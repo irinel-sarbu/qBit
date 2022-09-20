@@ -11,4 +11,12 @@ public class Event {
     public EventType getType() {
         return type;
     }
+
+    public boolean isHandled() {
+        return handled;
+    }
+
+    protected void setHandled(boolean handled) {
+        this.handled = handled;
+    }
 }

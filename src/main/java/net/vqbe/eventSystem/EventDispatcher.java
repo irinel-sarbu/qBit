@@ -8,10 +8,10 @@ public final class EventDispatcher {
     }
 
     public void dispatch(EventType type, EventHandler handler) {
-        if (event.handled) return;
+        if (event.isHandled()) return;
 
         if (event.getType() == type) {
-            event.handled = handler.handle(event);
+            event.setHandled(handler.handle(event));
         }
     }
 }
