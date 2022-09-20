@@ -1,12 +1,16 @@
 package net.vqbe.opengl;
 
+import net.vqbe.eventSystem.Observable;
+import net.vqbe.eventSystem.types.application.WindowCloseEvent;
+import net.vqbe.input.Keyboard;
+import net.vqbe.input.Mouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class Window {
+public class Window extends Observable {
     private static final Logger LOGGER = LoggerFactory.getLogger(Window.class);
 
     private long glWindow;
@@ -30,17 +34,13 @@ public class Window {
 
         setVsync(false);
 
-//        glfwSetWindowCloseCallback(m_Window, (window) -> notify(new WindowCloseEvent()));
-//
-//        glfwSetCharCallback(m_Window, (window, key) -> notify(new KeyTypedEvent(KeyCode.get(key))));
-//        glfwSetKeyCallback(m_Window, (window, key, scancode, action, mods) -> {
-//            switch (action) {
-//                case GLFW_PRESS -> notify(new KeyPressedEvent(KeyCode.get(key), 0));
-//                case GLFW_RELEASE -> notify(new KeyReleasedEvent(KeyCode.get(key)));
-//                case GLFW_REPEAT -> notify(new KeyPressedEvent(KeyCode.get(key), 1));
-//            }
-//        });
+        glfwSetWindowCloseCallback(glWindow, (window) -> notify(new WindowCloseEvent()));
 
+        glfwSetCursorPosCallback(glWindow, Mouse::mousePosCallback);
+        glfwSetScrollCallback(glWindow, Mouse::mouseScrollCallback);
+        glfwSetMouseButtonCallback(glWindow, Mouse::mouseButtonCallback);
+
+        glfwSetKeyCallback(glWindow, Keyboard::keyCallback);
     }
 
     public long getGlWindow() {

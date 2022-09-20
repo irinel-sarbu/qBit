@@ -21,8 +21,8 @@ class GraphicsContext {
         glfwMakeContextCurrent(window.getGlWindow());
         GL.createCapabilities();
 
-        LOGGER.debug("{} Vendor:   {}\n", prefix, glGetString(GL_VENDOR));
-        LOGGER.debug("{} Renderer: {}\n", prefix, glGetString(GL_RENDERER));
-        LOGGER.debug("{} Version:  {}\n", prefix, glGetString(GL_VERSION));
+        LOGGER.debug("{} Vendor:   {}", prefix, glGetString(GL_VENDOR));
+        LOGGER.debug("{} Renderer: {}", prefix, glGetString(GL_RENDERER));
+        LOGGER.debug("{} Version:  {}", prefix, glGetString(GL_VERSION));
     }
 }
